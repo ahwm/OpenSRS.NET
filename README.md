@@ -17,33 +17,33 @@ The usage differs slightly between .NET Framework and .NET 8.
 Usage for .NET Framework and .NET versions < 8
 
 ```csharp
-
-var client = new OpenSRSClient("", "", true);
+var client = new OpenSRSClient("apiKey", "username", test: true);
 var resp = await client.RegisterAsync(request);
-
 ```
 
 ### .NET 8
 
-Microsoft added support for using the HttClient through dependency injection and this library takes advantage of that.
+Microsoft added support for using the HttpClient through dependency injection and this library takes advantage of that.
 
 ```csharp
-
 // Program.cs
 
 services.UseOpenSRS();
-
 ```
 
 ```csharp
-
 // controller
-public class Controller(OpenSRSClient openSrs)
+public class DomainController : Controller
 {
+    private readonly OpenSRSClient _openSrs;
+    public Controller(OpenSRSClient openSrs)
+    {
+        _openSrs = openSrs;
+        _openSrs.Configure("apiKey", "username", test: true);
+    }
     public async Task<IActionResult> RegisterDomain(object model)
     {
-        var resp = await openSrs.RegisterAsync(request);
+        var resp = await _openSrs.RegisterAsync(request);
     }
 }
-
 ```

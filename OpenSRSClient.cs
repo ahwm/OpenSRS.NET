@@ -57,7 +57,7 @@ namespace OpenSRS.NET
             var content = new StringContent(msg, Encoding.UTF8, "text/xml");
             content.Headers.Add("X-Signature", ComputeSignature(msg));
 
-            using (var resp = await httpClient.PostAsync("", content).ConfigureAwait(false))
+            using (var resp = await httpClient.PostAsync("/", content).ConfigureAwait(false))
             {
                 return await resp.Content.ReadAsStringAsync().ConfigureAwait(false);
             }
