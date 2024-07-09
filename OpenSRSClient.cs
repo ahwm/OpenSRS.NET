@@ -26,7 +26,6 @@ namespace OpenSRS.NET
             {
                 BaseAddress = test ? TestingEndpoint : ProductionEndpoint
             };
-            httpClient.DefaultRequestHeaders.Add("Content-Type", "text/xml");
             httpClient.DefaultRequestHeaders.Add("X-Username", userName);
             httpClient.DefaultRequestHeaders.Add("Keep-Alive", "false");
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
@@ -35,7 +34,6 @@ namespace OpenSRS.NET
         public OpenSRSClient(HttpClient _httpClient)
         {
             httpClient = _httpClient;
-            httpClient.DefaultRequestHeaders.Add("Content-Type", "text/xml");
             httpClient.DefaultRequestHeaders.Add("Keep-Alive", "false");
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
         }
