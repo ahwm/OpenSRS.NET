@@ -1,5 +1,7 @@
 # OpenSRS.NET
 
+[![build](https://github.com/ahwm/OpenSRS.NET/actions/workflows/build.yml/badge.svg)](https://github.com/ahwm/OpenSRS.NET/actions/workflows/build.yml)
+
 Fully operational API client for OpenSRS
 
 Leading libraries lack a lot of functionality. Some of the base implementation inspired by/borrowed from [OpenSrs](https://github.com/carbon/OpenSrs).
