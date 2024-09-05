@@ -6,7 +6,7 @@
     <RepositoryUrl>https://github.com/ahwm/OpenSRS.NET</RepositoryUrl>
     <PackageProjectUrl>https://github.com/ahwm/OpenSRS.NET</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.0.1-beta2</Version>
+    <Version>0.0.1-beta3</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
     <Copyright>(c) 2024 Adam Humpherys</Copyright>
@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
   </ItemGroup>
