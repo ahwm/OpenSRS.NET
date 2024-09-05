@@ -51,6 +51,7 @@ namespace OpenSRS.NET
             var sb = new StringBuilder();
             sb.AppendLine(@"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""no""?>");
             sb.AppendLine(@"<!DOCTYPE OPS_envelope SYSTEM ""ops.dtd"">");
+            sb.Append(request.ToXml().ToString());
 
             var msg = sb.ToString();
             
