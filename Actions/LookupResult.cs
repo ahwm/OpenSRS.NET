@@ -23,12 +23,26 @@ namespace OpenSRS.NET.Actions
         {
             var attributes = ResponseHelper.ParseAttributes(text);
 
-            return new LookupResult
+            try
             {
-                Status = (DomainStatus)Enum.Parse(typeof(DomainStatus), attributes["status"], ignoreCase: true),
-                HasClaim = attributes.TryGetValue("has_claim", out var claim) && claim == "1",
-                Reason = attributes.TryGetValue("reason", out var reason) ? reason : null
-            };
+                return new LookupResult
+                {
+                    Status = (DomainStatus)Enum.Parse(typeof(DomainStatus), attributes["status"], ignoreCase: true),
+                    HasClaim = attributes.TryGetValue("has_claim", out var claim) && claim == "1",
+                    Reason = attributes.TryGetValue("reason", out var reason) ? reason : null
+                };
+            }
+            catch (Exception ex)
+            {
+                if (attributes["is_success"] != "1")
+                {
+                    throw new OpenSRSException(attributes["response_text"])
+                    {
+                        ResponseCode = attributes["response_code"]
+                    };
+                }
+                throw new Exception("Unknown error", ex);
+            }
         }
     }
 }

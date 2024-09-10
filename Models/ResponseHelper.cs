@@ -16,7 +16,9 @@ namespace OpenSRS.NET.Models
 #if NETCORE
             if (itemEl == null)
             {
-                return [];
+                itemEl = doc.XPathSelectElement(@"/OPS_envelope/body/data_block/dt_assoc");
+                var dic = ReadAssocAsDic(itemEl!);
+                return dic;
             }
 #endif
 

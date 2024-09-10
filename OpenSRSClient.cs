@@ -38,11 +38,9 @@ namespace OpenSRS.NET
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
         }
 
-        public void Configure(string key, string userName, bool test = false)
+        public void Configure(string key)
         {
             Key = key;
-            httpClient.BaseAddress = test ? TestingEndpoint : ProductionEndpoint;
-            httpClient.DefaultRequestHeaders.Add("X-Username", userName);
         }
 #endif
 

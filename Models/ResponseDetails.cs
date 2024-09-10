@@ -20,15 +20,36 @@ namespace OpenSRS.NET.Models
         {
             var dic = ResponseHelper.ReadAssocAsDic(el);
 
-            return new ResponseDetails
+            try
             {
-                Protocol = dic["protocol"],
-                Object = dic["object"],
-                Action = dic["action"],
-                ResponseCode = dic["response_code"],
-                ResponseText = dic["response_text"],
-                IsSuccess = dic["is_success"] == "1"
-            };
+                return new ResponseDetails
+                {
+                    Protocol = dic["protocol"],
+                    Object = dic["object"],
+                    Action = dic["action"],
+                    ResponseCode = dic["response_code"],
+                    ResponseText = dic["response_text"],
+                    IsSuccess = dic["is_success"] == "1"
+                };
+            }
+            catch
+            {
+                ResponseDetails details = new ResponseDetails();
+                if (dic.ContainsKey("protocol"))
+                    details.Protocol = dic["protocol"];
+                if (dic.ContainsKey("object"))
+                    details.Object = dic["object"];
+                if (dic.ContainsKey("action"))
+                    details.Action = dic["action"];
+                if (dic.ContainsKey("response_code"))
+                    details.ResponseCode = dic["response_code"];
+                if (dic.ContainsKey("response_text"))
+                    details.ResponseText = dic["response_text"];
+                if (dic.ContainsKey("is_success"))
+                    details.IsSuccess = dic["is_success"] == "1";
+
+                return details;
+            }
         }
     }
 }
