@@ -18,7 +18,7 @@ namespace OpenSRS.NET
         /// <returns></returns>
         public static IServiceCollection UseOpenSRS(this IServiceCollection services, string key, string username, bool test = false)
         {
-            services.AddHttpClient("OpenSRS", client =>
+            services.AddHttpClient<OpenSRSClient>(client =>
             {
                 client.BaseAddress = test ? new Uri("https://horizon.opensrs.net:55443") : new Uri("https://rr-n1-tor.opensrs.net:55443");
                 client.DefaultRequestHeaders.Add("X-Username", username);
