@@ -4,17 +4,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using OpenSRS.NET.Actions;
+#if NETCORE
+using Microsoft.Extensions.Options;
+#endif
 
 namespace OpenSRS.NET
 {
     public partial class OpenSRSClient
     {
+#if !NETCORE
         private static readonly Uri ProductionEndpoint = new Uri("https://rr-n1-tor.opensrs.net:55443");
         private static readonly Uri TestingEndpoint = new Uri("https://horizon.opensrs.net:55443");
-#if !NETCORE
         private readonly string Key;
 #else
-        private string Key = "";
+        private readonly string Key = "";
 #endif
         private readonly HttpClient httpClient;
 
@@ -31,16 +34,13 @@ namespace OpenSRS.NET
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
         }
 #else
-        public OpenSRSClient(HttpClient _httpClient)
+        public OpenSRSClient(HttpClient _httpClient, IOptions<OpenSRSClientOptions> options)
         {
             httpClient = _httpClient;
             httpClient.DefaultRequestHeaders.Add("Keep-Alive", "false");
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
-        }
 
-        public void Configure(string key)
-        {
-            Key = key;
+            Key = options.Value.Key;
         }
 #endif
 
@@ -67,5 +67,10 @@ namespace OpenSRS.NET
             // md5_hex(md5_hex($xml, $private_key),$private_key)
             return Extensions.CalculateMD5Hash(Extensions.CalculateMD5Hash(message + Key) + Key);
         }
+    }
+
+    public class OpenSRSClientOptions
+    {
+        public string Key { get; set; } = "";
     }
 }
