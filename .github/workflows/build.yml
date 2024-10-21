@@ -12,12 +12,13 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Build
         run: dotnet build
       - name: Pack
         run: dotnet pack
       - name: Publish
+        if: ${{ github.ref == 'refs/heads/master' && github.event_name != 'pull_request' }}
         run: |
           dotnet nuget add source --username ahwm --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/ahwm/index.json"
           dotnet nuget push "bin\Release\*.nupkg" --skip-duplicate --source "github" -k ${{ secrets.GH_NUGET }}
