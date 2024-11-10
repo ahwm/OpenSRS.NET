@@ -1,8 +1,6 @@
 #if NETCORE
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Linq;
-using System.Net.Http;
 #endif
 
 namespace OpenSRS.NET

@@ -13,15 +13,6 @@ namespace OpenSRS.NET.Models
 
             var itemEl = doc.XPathSelectElement(@"//item[@key=""attributes""]/dt_assoc");
 
-#if NETCORE
-            if (itemEl == null)
-            {
-                itemEl = doc.XPathSelectElement(@"/OPS_envelope/body/data_block/dt_assoc");
-                var dic = ReadAssocAsDic(itemEl!);
-                return dic;
-            }
-#endif
-
             return ReadAssoc(itemEl);
         }
 
@@ -29,21 +20,12 @@ namespace OpenSRS.NET.Models
         {
             var itemEl = doc.XPathSelectElement(@"//item[@key=""attributes""]/dt_assoc");
 
-#if NETCORE
-            if (itemEl == null)
-            {
-                return [];
-            }
-#endif
-
             return ReadAssocAsDic(itemEl);
         }
 
         public static Dictionary<string, string> ReadAssocAsDic(XElement dtAssocEl)
         {
-#pragma warning disable CA1510 // Use ArgumentNullException throw helper
             if (dtAssocEl is null) throw new ArgumentNullException(nameof(dtAssocEl));
-#pragma warning restore CA1510 // Use ArgumentNullException throw helper
 
             var expando = new Dictionary<string, string>();
 

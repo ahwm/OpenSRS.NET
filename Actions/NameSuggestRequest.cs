@@ -21,7 +21,7 @@ namespace OpenSRS.NET.Actions
         /// Lookups are available for all gTLDs and ccTLDs.
         /// [.com,.net,.org,.info,.biz,.us,.mobi]
         /// </summary>
-        public string[] Tlds { get; set; } = [];
+        public string[] Tlds { get; set; }
 #else
         public string Query { get; set; }
 

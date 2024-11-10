@@ -1,15 +1,12 @@
 ﻿using OpenSRS.NET.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
 namespace OpenSRS.NET.Actions
 {
-    public class NameSuggestResult
+    public sealed class NameSuggestResult
     {
         public IList<DomainItem> Lookup { get; } = new List<DomainItem>();
 
@@ -25,15 +22,9 @@ namespace OpenSRS.NET.Actions
 
                 var doc = XDocument.Parse(text);
 
-#if NETCORE
-                XElement? responseTime = doc.XPathSelectElement(@"//item[@key=""request_response_time""]");
-                XElement? lookupArray = doc.XPathSelectElement(@"//item[@key=""lookup""]/dt_assoc/item[@key=""items""]/dt_array");
-                XElement? suggestionArray = doc.XPathSelectElement(@"//item[@key=""suggestion""]/dt_assoc/item[@key=""items""]/dt_array");
-#else
                 XElement responseTime = doc.XPathSelectElement(@"//item[@key=""request_response_time""]");
                 XElement lookupArray = doc.XPathSelectElement(@"//item[@key=""lookup""]/dt_assoc/item[@key=""items""]/dt_array");
                 XElement suggestionArray = doc.XPathSelectElement(@"//item[@key=""suggestion""]/dt_assoc/item[@key=""items""]/dt_array");
-#endif
 
                 if (responseTime != null)
                     response.ResponseTime = TimeSpan.FromSeconds((float)responseTime);

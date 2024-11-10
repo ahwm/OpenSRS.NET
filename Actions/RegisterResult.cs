@@ -44,11 +44,7 @@ namespace OpenSRS.NET.Actions
 
             var itemEl = doc.XPathSelectElement(@"/OPS_envelope/body/data_block/dt_assoc");
 
-#if NETCORE
-            var response = ResponseDetails.FromEl(itemEl!);
-#else
             var response = ResponseDetails.FromEl(itemEl);
-#endif
 
             if (!response.IsSuccess)
             {

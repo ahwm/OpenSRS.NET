@@ -1,9 +1,5 @@
 ﻿using OpenSRS.NET.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenSRS.NET.Actions
 {
@@ -13,11 +9,7 @@ namespace OpenSRS.NET.Actions
 
         public bool HasClaim { get; set; }
 
-#if NETCORE
-        public string? Reason { get; set; }
-#else
         public string Reason { get; set; }
-#endif
 
         public static LookupResult Parse(string text)
         {
