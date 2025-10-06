@@ -17,9 +17,9 @@ public class OpenSRSClientTests
                 .ReturnsAsync("mocked response");
         }
 
-        private Task<string> SendAsync(OpenSRSRequest request)
+        private async Task<string> SendAsync(OpenSRSRequest request)
         {
-            return Mock.Object.SendAsync(request);
+            return await Mock.Object.SendAsync(request);
         }
     }
 

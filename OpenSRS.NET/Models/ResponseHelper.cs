@@ -11,7 +11,7 @@ namespace OpenSRS.NET.Models
         {
             var doc = XDocument.Parse(text);
 
-            var itemEl = doc.XPathSelectElement(@"//item[@key=""attributes""]/dt_assoc");
+            var itemEl = doc.XPathSelectElement(@"//item[@key=""attributes""]/dt_assoc") ?? doc.XPathSelectElement(@"//item[@key=""response_text""]/..");
 
             return ReadAssoc(itemEl);
         }

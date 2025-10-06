@@ -22,9 +22,9 @@ namespace OpenSRS.NET.Tests
             {
                 await _domainService.CheckAvailable("test.com");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Assert.Fail();
+                Assert.Fail(ex.Message);
             }
         }
     }
