@@ -18,7 +18,8 @@ Usage for .NET Framework and .NET versions < 8
 
 ```csharp
 var client = new OpenSRSClient("apiKey", "username", test: true);
-var resp = await client.RegisterAsync(request);
+var resp = await client.RegisterAsync(new RegisterRequest { Domain = domain });
+var resp = await client.LookupAsync(new LookupRequest(domain));
 ```
 
 ### .NET 8
@@ -28,22 +29,21 @@ Microsoft added support for using the HttpClient through dependency injection an
 ```csharp
 // Program.cs
 
-services.UseOpenSRS();
+services.AddOpenSRS(_settings.Key, _settings.Username, _settings.IsTest);
 ```
 
 ```csharp
 // controller
-public class DomainController : Controller
+public class DomainController(OpenSRSClient openSrs) : Controller
 {
-    private readonly OpenSRSClient _openSrs;
-    public Controller(OpenSRSClient openSrs)
+    public async Task<IActionResult> RegisterDomain(string domain)
     {
-        _openSrs = openSrs;
-        _openSrs.Configure("apiKey", "username", test: true);
+        var resp = await openSrs.RegisterAsync(new RegisterRequest { Domain = domain });
     }
-    public async Task<IActionResult> RegisterDomain(object model)
+
+    public async Task<IActionResult> Lookup(string domain)
     {
-        var resp = await _openSrs.RegisterAsync(request);
+        var resp = await openSrs.LookupAsync(new LookupRequest(domain));
     }
 }
 ```
