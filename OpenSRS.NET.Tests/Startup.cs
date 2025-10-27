@@ -6,7 +6,7 @@ namespace OpenSRS.NET.Tests
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOpenSRS(Environment.GetEnvironmentVariable("OPENSRS_TEST_KEY"), Environment.GetEnvironmentVariable("OPENSRS_TEST_USER"), true);
+            services.AddOpenSRS(Environment.GetEnvironmentVariable("OPENSRS_TEST_KEY")!.Trim(), Environment.GetEnvironmentVariable("OPENSRS_TEST_USER")!.Trim(), true);
             services.AddTransient<IDomainService, OpenSRSDomainService>();
         }
     }
