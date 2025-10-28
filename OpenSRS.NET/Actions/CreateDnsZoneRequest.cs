@@ -5,8 +5,7 @@ namespace OpenSRS.NET.Actions
 {
     public sealed class CreateDnsZoneRequest : OpenSRSRequest
     {
-        public CreateDnsZoneRequest()
-            : base("CREATE_DNS_ZONE", "DOMAIN") { }
+        public CreateDnsZoneRequest() : base("CREATE_DNS_ZONE", "DOMAIN") { }
 
         public string Domain { get; set; }
 

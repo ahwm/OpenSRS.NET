@@ -6,8 +6,7 @@ namespace OpenSRS.NET.Actions
 {
     public sealed class GetPriceRequest : OpenSRSRequest
     {
-        public GetPriceRequest(string domain, int period = 1)
-            : base("GET_PRICE", "DOMAIN")
+        public GetPriceRequest(string domain, int period = 1) : base("GET_PRICE", "DOMAIN")
         {
             this.Domain = domain ?? throw new ArgumentNullException(nameof(domain));
             this.Period = period;

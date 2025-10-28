@@ -1,33 +1,35 @@
-using System;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http.Headers;
-using OpenSRS.NET.Actions;
 #if NETCORE
 using Microsoft.Extensions.Options;
 #endif
+using OpenSRS.NET.Actions;
+#if !NETCORE
+using System;
+#endif
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenSRS.NET
 {
     public partial class OpenSRSClient
     {
-#if !NETCORE
-        private static readonly Uri ProductionEndpoint = new Uri("https://rr-n1-tor.opensrs.net:55443");
-        private static readonly Uri TestingEndpoint = new Uri("https://horizon.opensrs.net:55443");
-        private readonly string Key;
-#else
         private readonly string Key = "";
-#endif
+
         private readonly HttpClient httpClient;
 
 #if !NETCORE
         public OpenSRSClient(string key, string userName, bool test = false)
         {
+            if (String.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("API key must be provided.", nameof(key));
+            if (String.IsNullOrWhiteSpace(userName))
+                throw new ArgumentException("API username must be provided.", nameof(userName));
+
             Key = key;
             httpClient = new HttpClient
             {
-                BaseAddress = test ? TestingEndpoint : ProductionEndpoint
+                BaseAddress = test ? new Uri("https://horizon.opensrs.net:55443") : new Uri("https://rr-n1-tor.opensrs.net:55443")
             };
             httpClient.DefaultRequestHeaders.Add("X-Username", userName);
             httpClient.DefaultRequestHeaders.Add("Keep-Alive", "false");
@@ -64,13 +66,14 @@ namespace OpenSRS.NET
 
         private string ComputeSignature(string message)
         {
-            // md5_hex(md5_hex($xml, $private_key),$private_key)
             return Extensions.CalculateMD5Hash(Extensions.CalculateMD5Hash(message + Key) + Key);
         }
     }
+#if NETCORE
 
     public class OpenSRSClientOptions
     {
         public string Key { get; set; } = "";
     }
+#endif
 }

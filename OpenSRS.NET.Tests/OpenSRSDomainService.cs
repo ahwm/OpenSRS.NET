@@ -27,5 +27,17 @@ namespace OpenSRS.NET.Tests
 
             }
         }
+
+        public async Task<GetBalanceResult> GetBalance()
+        {
+            var result = await openSRS.GetBalanceAsync(new GetBalanceRequest());
+            return result;
+        }
+
+        public async Task<string> GetContract()
+        {
+            var result = await openSRS.GetContractAsync(new GetContractRequest());
+            return result.Contract;
+        }
     }
 }

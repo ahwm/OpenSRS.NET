@@ -1,5 +1,4 @@
 ﻿using OpenSRS.NET.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
@@ -8,8 +7,7 @@ namespace OpenSRS.NET.Actions
 {
     public sealed class RegisterRequest : OpenSRSRequest
     {
-        public RegisterRequest()
-            : base("SW_REGISTER", "DOMAIN")
+        public RegisterRequest() : base("SW_REGISTER", "DOMAIN")
         {
             Period = 1;
             RegistrationType = RegistrationType.New;

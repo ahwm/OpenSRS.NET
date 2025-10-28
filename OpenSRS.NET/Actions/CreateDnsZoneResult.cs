@@ -1,12 +1,6 @@
 ﻿using OpenSRS.NET.Models;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
 using System.Xml.XPath;
 

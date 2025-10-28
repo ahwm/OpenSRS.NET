@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenSRS.NET.Actions
 {
@@ -13,7 +10,6 @@ namespace OpenSRS.NET.Actions
             MaxWaitTime = TimeSpan.FromSeconds(5);
         }
 
-#if NETCORE
         public string Query { get; set; } = "";
 
         /// <summary>
@@ -22,16 +18,6 @@ namespace OpenSRS.NET.Actions
         /// [.com,.net,.org,.info,.biz,.us,.mobi]
         /// </summary>
         public string[] Tlds { get; set; }
-#else
-        public string Query { get; set; }
-
-        /// <summary>
-        /// The TLDs you want to check for domain name availability and suggestions.
-        /// Lookups are available for all gTLDs and ccTLDs.
-        /// [.com,.net,.org,.info,.biz,.us,.mobi]
-        /// </summary>
-        public string[] Tlds { get; set; }
-#endif
 
         public TimeSpan MaxWaitTime { get; set; }
 

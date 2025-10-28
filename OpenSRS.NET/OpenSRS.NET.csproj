@@ -9,7 +9,7 @@
     <Version>0.0.1-beta9</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
-    <Copyright>(c) 2024 Adam Humpherys</Copyright>
+    <Copyright>(c) $([System.DateTime]::UtcNow.ToString(`yyyy`)) Adam Humpherys</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>Fully featured client for interacting with OpenSRS APIs</Description>
     <PackageTags>opensrs</PackageTags>

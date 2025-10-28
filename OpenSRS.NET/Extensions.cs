@@ -1,18 +1,15 @@
 ﻿using OpenSRS.NET.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace OpenSRS.NET
 {
     internal static class Extensions
     {
-        public static T ParseEnum<T>(string text, bool ignoreCase = false)
-            where T : Enum
+        public static T ParseEnum<T>(string text, bool ignoreCase = false) where T : Enum
         {
             return (T)Enum.Parse(typeof(T), text, ignoreCase);
         }
@@ -30,9 +27,7 @@ namespace OpenSRS.NET
             // step 1, calculate MD5 hash from input
             var md5 = System.Security.Cryptography.MD5.Create();
             byte[] inputBytes = Encoding.ASCII.GetBytes(input);
-#pragma warning disable CA1850 // Prefer static 'HashData' method over 'ComputeHash' due to multi-target
             byte[] hash = md5.ComputeHash(inputBytes);
-#pragma warning restore CA1850 // Prefer static 'HashData' method over 'ComputeHash' due to multi-target
 
             // step 2, convert byte array to hex string
             StringBuilder sb = new StringBuilder();
