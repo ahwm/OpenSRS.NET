@@ -76,4 +76,48 @@ public class OpenSRSClientTests
         var result = await client.CreateDnsZoneAsync(request);
         Assert.IsType<CreateDnsZoneResult>(result);
     }
+
+    [Fact]
+    public async Task GetDnsZoneAsync_ReturnsParsedResult()
+    {
+        var client = new TestOpenSRSClient();
+        var request = new GetDnsZoneRequest { Domain = "example.com" };
+        var result = await client.GetDnsZoneAsync(request);
+        Assert.IsType<GetDnsZoneResult>(result);
+    }
+
+    [Fact]
+    public async Task SetDnsZoneAsync_ReturnsParsedResult()
+    {
+        var client = new TestOpenSRSClient();
+        var request = new SetDnsZoneRequest { Domain = "example.com" };
+        var result = await client.SetDnsZoneAsync(request);
+        Assert.IsType<SetDnsZoneResult>(result);
+    }
+
+    [Fact]
+    public async Task ResetDnsZoneAsync_ReturnsParsedResult()
+    {
+        var client = new TestOpenSRSClient();
+        var request = new ResetDnsZoneRequest { Domain = "example.com" };
+        var result = await client.ResetDnsZoneAsync(request);
+        Assert.IsType<ResetDnsZoneResult>(result);
+    }
+
+    [Fact]
+    public async Task ForceDnsNameserversAsync_ReturnsParsedResult()
+    {
+        var client = new TestOpenSRSClient();
+        var request = new ForceDnsNameserversRequest { Domain = "example.com" };
+        var result = await client.ForceDnsNameserversAsync(request);
+        Assert.IsType<ForceDnsNameserversResult>(result);
+    }
+
+    [Fact]
+    public async Task DeleteDnsZoneAsync_CompletesSuccessfully()
+    {
+        var client = new TestOpenSRSClient();
+        var request = new DeleteDnsZoneRequest { Domain = "example.com" };
+        await client.DeleteDnsZoneAsync(request);
+    }
 }
