@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="OpenSRS.NET.Tests/OpenSRS.NET.Tests.csproj" />
+  <Project Path="OpenSRS.NET/OpenSRS.NET.csproj" />
+</Solution>

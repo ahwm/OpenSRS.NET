@@ -35,7 +35,7 @@ namespace OpenSRS.NET.Actions
         public string UserName { get; set; } = "";
 
         // A-Z, a-z, 0-9, ! @\$^,.~|=-+_{}#"
-        [MinLength(10), MaxLength(20)]
+        [MinLength(10), MaxLength(20), RegularExpression(@"[A-Za-z0-9!@\\$^,.~|=\-+_{}#]{10,20}")]
         public string Password { get; set; } = "";
 
         public string DnsTemplate { get; set; } = "";
